@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Web Vitals Test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-  <!-- Add Web Vitals library -->
-  <script src="https://unpkg.com/web-vitals@1"></script>
 </head>
 <body>
   <p><img style="max-width: 360px" src="https://placekitten.com/g/3840/2160" alt="Kitten" /></p>
   <p>Text below image</p>
- <script>
-  // Initialize Firebase
-  var firebaseConfig = {
-   apiKey: "AIzaSyBlpZ_EW6ihxCovS-Bng6Sx7JRI-M1oSO0",
-   authDomain: "dazzling-ego-411013.firebaseapp.com",
-   projectId: "dazzling-ego-411013",
-   storageBucket: "dazzling-ego-411013.appspot.com",
-   messagingSenderId: "349462309676",
-   appId: "1:349462309676:web:7c72b83acd580113301a89"
-  };
-  firebase.initializeApp(firebaseConfig);
-  var analytics = firebase.analytics();
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+    import {getCLS, getFID, getLCP} from 'https://unpkg.com/web-vitals?module';
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBlpZ_EW6ihxCovS-Bng6Sx7JRI-M1oSO0",
+      authDomain: "dazzling-ego-411013.firebaseapp.com",
+      projectId: "dazzling-ego-411013",
+      storageBucket: "dazzling-ego-411013.appspot.com",
+      messagingSenderId: "349462309676",
+      appId: "1:349462309676:web:7c72b83acd580113301a89",
+      measurementId: "G-K1XP0F240Y"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
 
-  // Measure and log Cumulative Layout Shift (CLS) score
-  webVitals.getCLS(metric => {
-      console.log('CLS:', metric.value);
-      analytics.logEvent('cls', {value: metric.value});
-  });
+    // Measure and log Cumulative Layout Shift (CLS) score
+    getCLS(metric => {
+        console.log('CLS:', metric.value);
+        analytics.logEvent('cls', {value: metric.value});
+    });
 
-  // Measure and log First Input Delay (FID) score
-  webVitals.getFID(metric => {
-      console.log('FID:', metric.value);
-      analytics.logEvent('fid', {value: metric.value});
-  });
+    // Measure and log First Input Delay (FID) score
+    getFID(metric => {
+        console.log('FID:', metric.value);
+        analytics.logEvent('fid', {value: metric.value});
+    });
 
-  // Measure and log Largest Contentful Paint (LCP) score
-  webVitals.getLCP(metric => {
-      console.log('LCP:', metric.value);
-      analytics.logEvent('lcp', {value: metric.value});
-  });
- </script>
+    // Measure and log Largest Contentful Paint (LCP) score
+    getLCP(metric => {
+        console.log('LCP:', metric.value);
+        analytics.logEvent('lcp', {value: metric.value});
+    });
+  </script> 
 </body>
 </html>
