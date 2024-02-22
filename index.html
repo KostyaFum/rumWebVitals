@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Web Vitals Test 21</title>
+  <title>Web Vitals Test 22</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -32,19 +32,19 @@
     // Measure and log Cumulative Layout Shift (CLS) score
     getCLS(metric => {
         console.log('CLS:', metric.value);
-        analytics.logEvent('cls', {value: metric.value});
+        analytics.logEvent('performance', {cls: metric.value});
     });
 
     // Measure and log First Input Delay (FID) score
     getFID(metric => {
         console.log('FID:', metric.value);
-        analytics.logEvent('fid', {value: metric.value});
+        analytics.logEvent('performance', {fid: metric.value});
     });
 
     // Measure and log Largest Contentful Paint (LCP) score
     getLCP(metric => {
         console.log('LCP:', metric.value);
-        analytics.logEvent('lcp', {value: metric.value});
+        analytics.logEvent('performance', {lcp: metric.value});
     });
   </script> 
 </body>
