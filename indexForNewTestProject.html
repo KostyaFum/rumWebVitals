@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Vitals Test 22</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <p><img style="max-width: 360px" src="https://placekitten.com/g/3840/2160" alt="Kitten" /></p>
+  <p>Text below image</p>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+    import {getCLS, getFID, getLCP} from 'https://unpkg.com/web-vitals?module';
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3ZWhT4gIgSsKtBqYDNRkeKXvWgYVmX-4",
+      authDomain: "new-test-project-7169c.firebaseapp.com",
+      projectId: "new-test-project-7169c",
+      storageBucket: "new-test-project-7169c.appspot.com",
+      messagingSenderId: "178998228751",
+      appId: "1:178998228751:web:46af39857111d4c357f07a",
+      measurementId: "G-EG4EE1ZSRL"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Measure and log Cumulative Layout Shift (CLS) score
+    getCLS(metric => {
+        console.log('CLS:', metric.value);
+        analytics.logEvent('performance', {cls: metric.value});
+    });
+
+    // Measure and log First Input Delay (FID) score
+    getFID(metric => {
+        console.log('FID:', metric.value);
+        analytics.logEvent('performance', {fid: metric.value});
+    });
+
+    // Measure and log Largest Contentful Paint (LCP) score
+    getLCP(metric => {
+        console.log('LCP:', metric.value);
+        analytics.logEvent('performance', {lcp: metric.value});
+    });
+  </script> 
+</body>
+</html>
