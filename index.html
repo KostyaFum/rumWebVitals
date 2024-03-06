@@ -2,50 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Web Vitals Test 22</title>
+  <title>LocalLabRUM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <p><img style="max-width: 360px" src="https://placekitten.com/g/3840/2160" alt="Kitten" /></p>
-  <p>Text below image</p>
+
+  <!-- Add Web Vitals Library -->
+  <script src="https://unpkg.com/web-vitals"></script>
+
   <script type="module">
     // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-    import {getCLS, getFID, getLCP} from 'https://unpkg.com/web-vitals?module';
-  
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+
     // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyC3ZWhT4gIgSsKtBqYDNRkeKXvWgYVmX-4",
-      authDomain: "new-test-project-7169c.firebaseapp.com",
-      projectId: "new-test-project-7169c",
-      storageBucket: "new-test-project-7169c.appspot.com",
-      messagingSenderId: "178998228751",
-      appId: "1:178998228751:web:46af39857111d4c357f07a",
-      measurementId: "G-EG4EE1ZSRL"
+      apiKey: "AIzaSyDNMF00LWY7RKmWbm4oI4sPaZ80oAgfIfQ",
+      authDomain: "customevents-202403.firebaseapp.com",
+      projectId: "customevents-202403",
+      storageBucket: "customevents-202403.appspot.com",
+      messagingSenderId: "63849615690",
+      appId: "1:63849615690:web:86f0c6e3b5759d8c11b1b3"
     };
-  
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
-    // Measure and log Cumulative Layout Shift (CLS) score
-    getCLS(metric => {
-        console.log('CLS:', metric.value);
-        analytics.logEvent('performance', {cls: metric.value});
-    });
+    // Log Core Web Vitals
+    webVitals.getCLS(sendToFirebase);
+    webVitals.getFID(sendToFirebase);
+    webVitals.getLCP(sendToFirebase);
+    webVitals.getFCP(sendToFirebase);
+    webVitals.getTTFB(sendToFirebase);
 
-    // Measure and log First Input Delay (FID) score
-    getFID(metric => {
-        console.log('FID:', metric.value);
-        analytics.logEvent('performance', {fid: metric.value});
-    });
-
-    // Measure and log Largest Contentful Paint (LCP) score
-    getLCP(metric => {
-        console.log('LCP:', metric.value);
-        analytics.logEvent('performance', {lcp: metric.value});
-    });
-  </script> 
+    function sendToFirebase(metric) {
+      logEvent(analytics, 'web_vital', {
+        name: metric.name,
+        value: metric.value,
+        id: metric.id,
+        delta: metric.delta,
+        entries: JSON.stringify(metric.entries),
+      });
+    }
+  </script>
+</head>
+<body>
+  <p><img style="max-width: 360px" src="https://placekitten.com/g/3840/2160" alt="Kitten" /></p>
+  <p>Text below image</p>
 </body>
 </html>
