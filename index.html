@@ -10,7 +10,7 @@
 
   <script type="module">
     // Import the functions you need from the SDKs you need
-    import { initializeApp, getApps, setLogLevel } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
 
     // Your web app's Firebase configuration
@@ -27,11 +27,6 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
-    // Enable verbose logging
-    if (getApps().length) {
-      setLogLevel('debug');
-    }
-
     // Log Core Web Vitals
     webVitals.getCLS(sendToFirebase);
     webVitals.getFID(sendToFirebase);
@@ -40,6 +35,7 @@
     webVitals.getTTFB(sendToFirebase);
 
     function sendToFirebase(metric) {
+      console.log('sendToFirebase called with metric:', metric);
       logEvent(analytics, 'web_vital', {
         name: metric.name,
         value: metric.value,
