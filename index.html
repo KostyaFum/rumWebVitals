@@ -41,26 +41,7 @@
   </style>
 </head>
 <body>
-  <img id="banner" style="max-width: 360px" src="https://placekitten.com/g/3840/2160" alt="Banner" />
-  <button class="like-button" onclick="incrementLike()">Like</button>
-  <p id="like-counter">0</p>
-  <script>
-    let likeCount = 0;
-    function incrementLike() {
-      likeCount++;
-      document.getElementById('like-counter').innerText = likeCount;
-    }
-
-    const images = [
-      "https://placekitten.com/g/3840/2160",
-      "https://images.dog.ceo/breeds/puppy/n02098105_2304.jpg",
-      "https://cdn.pixabay.com/photo/2013/07/19/00/18/fish-165615_960_720.jpg"
-    ];
-    let currentImageIndex = 0;
-    setInterval(() => {
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      document.getElementById('banner').src = images[currentImageIndex];
-    }, 5000);
-  </script>
+   <p><img style="max-width: 360px" src="https://placekitten.com/g/3840/2160" alt="Kitten" /></p>
+  <p>Text below image</p>
 </body>
 </html>
