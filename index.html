@@ -4,51 +4,36 @@
   <meta charset="UTF-8">
   <title>LocalLabRUM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Add Web Vitals Library -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js"></script>
   <script src="https://unpkg.com/web-vitals"></script>
-
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
+  <script>
     // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDNMF00LWY7RKmWbm4oI4sPaZ80oAgfIfQ",
-      authDomain: "customevents-202403.firebaseapp.com",
-      projectId: "customevents-202403",
-      storageBucket: "customevents-202403.appspot.com",
-      messagingSenderId: "63849615690",
-      appId: "1:63849615690:web:86f0c6e3b5759d8c11b1b3"
+    var firebaseConfig = {
+      apiKey: "AIzaSyC3ZWhT4gIgSsKtBqYDNRkeKXvWgYVmX-4",
+      authDomain: "new-test-project-7169c.firebaseapp.com",
+      projectId: "new-test-project-7169c",
+      storageBucket: "new-test-project-7169c.appspot.com",
+      messagingSenderId: "178998228751",
+      appId: "1:178998228751:web:46af39857111d4c357f07a",
+      measurementId: "G-EG4EE1ZSRL"
     };
-
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore();
-
-    // Log Core Web Vitals
-    webVitals.getCLS(sendToFirebase);
-    webVitals.getFID(sendToFirebase);
-    webVitals.getLCP(sendToFirebase);
-    webVitals.getFCP(sendToFirebase);
-    webVitals.getTTFB(sendToFirebase);
-
-    async function sendToFirebase(metric) {
-      console.log('sendToFirebase called with metric:', metric);
-      await addDoc(collection(db, 'events'), {
-        name: metric.name,
-        value: metric.value,
-        id: metric.id,
-        delta: metric.delta,
-        entries: JSON.stringify(metric.entries),
-        timestamp: new Date().toISOString(),
-      });
-    }
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
   </script>
 </head>
 <body>
   <p><img style="max-width: 360px" src="https://placekitten.com/g/3840/2160" alt="Kitten" /></p>
   <p>Text below image</p>
+  <script>
+    function sendToAnalytics({name, delta, id}) {
+      firebase.analytics().logEvent(name, {id, value: delta, event_category: "Web Vitals"});
+    }
+
+    webVitals.getCLS(sendToAnalytics);
+    webVitals.getFID(sendToAnalytics);
+    webVitals.getLCP(sendToAnalytics);
+  </script>
 </body>
 </html>
